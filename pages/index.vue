@@ -1,16 +1,63 @@
 <template lang="pug">
-  div
-    h3 test
+v-layout(column)
+  img(src='/home-banner.jpg')
+  v-text-field.mt-5(v-model='searchValue', @change='searchProduct', label='Cari Nama Produk/Kode Produk', prepend-inner-icon='mdi-magnify', filled, dense)
+  v-btn.align-self-end.my-3.text-xs-right(@click='goToProducts', color='primary', depressed) Lihat Semua
+  vue-slick-carousel(cssEase='ease' :infinite='false', :draggable='true' lazyLoad='ondemand' :slidesToShow='3' :arrows='true' :dots='true')
+    v-card.text-center.card-light.mr-1(v-for='i in 6')
+      img.mx-3(:src='`/product-${ ((i-1) % 3) + 1}.jpg`', height='200px')
+      v-list-item-content.text-left.ml-3
+        v-list-item-title.headline.mb-1
+          | Nama Product
+        p #[b Rp. 0 ]
+  hr.mt-8
+  h4.display-0.text-center Terima kasih atas kunjunganya
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue';
-import VuetifyLogo from '~/components/VuetifyLogo.vue';
+import VueSlickCarousel from 'vue-slick-carousel';
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
+import numberHelper from  '~/mixins/number-helper';
 
 export default {
+  name: 'Index',
+  mixins: [numberHelper],
   components: {
-    Logo,
-    VuetifyLogo,
+    VueSlickCarousel,
   },
-}
+  data() {
+    return {
+      searchValue: '',
+    };
+  },
+  methods: {
+    searchProduct(){
+      
+    },
+    goToProducts(){
+      this.$router.push('/products');
+    },
+  },
+};
 </script>
+
+<style>
+  /* the slides */
+  .slick-slide {
+    margin-right: 5px;
+  }
+  .slick-track, .slick-list{
+    max-height: 300px;
+  }
+  .slick-dots li button:before{
+   color: #eee; 
+  }
+  .slick-dots li.slick-active button:before{
+   color: white; 
+  }
+  .card-light{
+    background: white !important;
+    color: black !important;
+  }
+</style>

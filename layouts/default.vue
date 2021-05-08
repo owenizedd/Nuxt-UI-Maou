@@ -1,11 +1,12 @@
 <template lang='pug'>
-  v-app(light)
+  v-app(dark)
     v-app-bar(:clipped-left='clipped' fixed app)
       
       v-toolbar-title(v-text='title')
       v-spacer
-      nuxt-link.app-bar-link(v-for='link in links' :to='link.to' :class='link.to === $route.path ? "active" : ""')
+      nuxt-link.app-bar-link(v-for='link in links' :key='link.to' :to='link.to' :class='link.to === $route.path ? "active" : ""')
         div {{link.title}}
+      p.ml-5(v-if='true') Admin1
     v-main
       v-container
         nuxt
@@ -45,7 +46,7 @@ export default {
           title: 'HOME',
         },
         {
-          to: '/product',
+          to: '/products',
           title: 'PRODUK',
         },
         {
