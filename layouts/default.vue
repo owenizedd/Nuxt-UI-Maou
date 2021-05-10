@@ -1,14 +1,21 @@
 <template lang='pug'>
   v-app(dark)
     v-app-bar(:clipped-left='clipped' fixed app)
-      
-      v-toolbar-title(v-text='title')
+      nuxt-link(to='/', v-if='username')
+        v-toolbar-title(v-text='title')
+      v-toolbar-title(v-text='title', v-else)
       v-spacer
-      nuxt-link.app-bar-link(v-for='link in links' :key='link.to' :to='link.to' :class='link.to === $route.path ? "active" : ""')
-        div {{link.title}}
-      nuxt-link.app-bar-link(v-for='link in adminLinks' :key='link.to' :to='link.to' :class='$route.path.indexOf(link.to) !== -1 ? "active" : ""')
-        div {{link.title}}
-      p.ml-5(v-if='isAdmin') user_admin_1
+
+      template(v-if='username')
+        nuxt-link.app-bar-link(v-for='link in links' :key='link.to' :to='link.to' :class='link.to === $route.path ? "active" : ""')
+          div {{link.title}}
+      template(v-else)
+        nuxt-link.app-bar-link(v-for='link in guestLinks' :key='link.to' :to='link.to' :class='link.to === $route.path ? "active" : ""')
+          div {{link.title}}
+      template(v-if='isAdmin && username')
+        nuxt-link.app-bar-link(v-for='link in adminLinks' :key='link.to' :to='link.to' :class='$route.path.indexOf(link.to) !== -1 ? "active" : ""')
+          div {{link.title}}
+      p.ml-5(v-if='username') user_admin_1
     v-main
       v-container
         nuxt
@@ -31,6 +38,7 @@ export default {
   computed: {
     ...mapGetters({
       isAdmin: 'getAdminStatus',
+      username: 'getUsername',
     }),
   },
   data() {
@@ -62,6 +70,16 @@ export default {
         {
           to: '/about',
           title: 'ABOUT US',
+        },
+      ],
+      guestLinks: [
+        {
+          to: '/login',
+          title: 'Login',
+        },
+        {
+          to: '/register',
+          title: 'Register',
         },
       ],
       adminLinks: [

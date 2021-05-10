@@ -13,5 +13,6 @@ export default {
   components: {
     AuthorCard,
   },
+  middleware: 'authenticated',
 }
 </script>

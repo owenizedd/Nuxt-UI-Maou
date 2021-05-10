@@ -19,6 +19,7 @@ import VueSlickCarousel from 'vue-slick-carousel';
 import 'vue-slick-carousel/dist/vue-slick-carousel.css';
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css';
 import numberHelper from  '~/mixins/number-helper';
+import {mapGetters} from 'vuex'
 
 export default {
   name: 'Index',
@@ -31,6 +32,11 @@ export default {
       searchValue: '',
     };
   },
+  computed: {
+    ...mapGetters({
+      username: 'getUsername',
+    }),
+  },
   methods: {
     searchProduct(){
       
@@ -39,6 +45,7 @@ export default {
       this.$router.push('/products');
     },
   },
+  middleware: 'authenticated',
 };
 </script>
 

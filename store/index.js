@@ -1,10 +1,11 @@
 const initialState = {
-  isAdmin: true,
+  isAdmin: false,
+  username: '',
 }
 
 const getters = {
   getAdminStatus: (state) => state.isAdmin,
-
+  getUsername: (state) => state.username,
 }
 
 const actions = {
@@ -16,6 +17,9 @@ const actions = {
 const mutations = {
   setAdminStatus(state, status){
     state.isAdmin = status;
+  },
+  setUsername(state, username){
+    state.username = username;
   },
   
 }
