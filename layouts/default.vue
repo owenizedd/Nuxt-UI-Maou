@@ -6,7 +6,9 @@
       v-spacer
       nuxt-link.app-bar-link(v-for='link in links' :key='link.to' :to='link.to' :class='link.to === $route.path ? "active" : ""')
         div {{link.title}}
-      p.ml-5(v-if='true') Admin1
+      nuxt-link.app-bar-link(v-for='link in adminLinks' :key='link.to' :to='link.to' :class='$route.path.indexOf(link.to) !== -1 ? "active" : ""')
+        div {{link.title}}
+      p.ml-5(v-if='isAdmin') user_admin_1
     v-main
       v-container
         nuxt
@@ -22,7 +24,15 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex';
+
 export default {
+  name: 'IndexPage',
+  computed: {
+    ...mapGetters({
+      isAdmin: 'getAdminStatus',
+    }),
+  },
   data() {
     return {
       clipped: false,
@@ -52,6 +62,12 @@ export default {
         {
           to: '/about',
           title: 'ABOUT US',
+        },
+      ],
+      adminLinks: [
+        {
+          to: '/data-products',
+          title: 'DATA PRODUK (ADMIN)',
         },
       ],
       miniVariant: false,

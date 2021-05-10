@@ -4,8 +4,8 @@ v-layout(column)
   v-text-field.mt-5(v-model='searchValue', @change='searchProduct', label='Cari Nama Produk/Kode Produk', prepend-inner-icon='mdi-magnify', filled, dense)
   v-btn.align-self-end.my-3.text-xs-right(@click='goToProducts', color='primary', depressed) Lihat Semua
   vue-slick-carousel(cssEase='ease' :infinite='false', :draggable='true' lazyLoad='ondemand' :slidesToShow='3' :arrows='true' :dots='true')
-    v-card.text-center.card-light.mr-1(v-for='i in 6')
-      img.mx-3(:src='`/product-${ ((i-1) % 3) + 1}.jpg`', height='200px')
+    v-card.text-center.card-light.mr-1(v-for='i in 6' :key='"product" + i')
+      img.mx-3(:src='`/product-${ ((i-1) % 4) + 1}.jpg`', height='200px' alt='product')
       v-list-item-content.text-left.ml-3
         v-list-item-title.headline.mb-1
           | Nama Product
@@ -57,7 +57,7 @@ export default {
    color: white; 
   }
   .card-light{
-    background: white !important;
-    color: black !important;
+    background: #efefef !important;
+    color: #222 !important;
   }
 </style>

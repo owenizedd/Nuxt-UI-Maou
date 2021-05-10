@@ -1,5 +1,5 @@
 const initialState = {
-  isAdmin: false,
+  isAdmin: true,
 }
 
 const getters = {
