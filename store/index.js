@@ -1,6 +1,6 @@
 const initialState = {
-  isAdmin: false,
-  username: '',
+  isAdmin: true,
+  username: 'a',
 }
 
 const getters = {
