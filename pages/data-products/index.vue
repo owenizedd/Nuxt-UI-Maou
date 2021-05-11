@@ -8,7 +8,7 @@ v-layout(column)
     v-progress-linear(slot='progress', color='primary', indeterminate)
     template(v-slot:item.lokasi="{item}")
       td
-        .map-button(@click='handleMap')
+        .map-button(@click='handleMap', style='cursor: pointer')
           v-icon(large, color="blue darken-2") mdi-map-marker
           span.blue--text Lihat lokasi
     template(v-slot:item.edit='{item}')
