@@ -29,7 +29,9 @@ export default {
       this.$refs.form.validate();
       await this.$nextTick();
       if(this.valid){
-        //proceed login
+        this.$auth.loginWith('local', { data: this.formData })
+          .then(() => this.$toast.success('Logged In!'))
+          .catch(() => this.$toast.error('Gagal login'))
       }
     },
   },

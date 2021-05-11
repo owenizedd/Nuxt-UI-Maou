@@ -41,8 +41,11 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     '@nuxtjs/auth-next',
+    '@nuxtjs/toast',
   ],
-
+  toast: {
+    duration: 3000,
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
@@ -70,5 +73,41 @@ export default {
   build: {},
   router: {
     middleware: ['auth'],
+  },
+  auth: {
+    strategies: {
+      local: {
+        token: {
+          property: 'token',
+        },
+        // refreshToken: {
+
+        // },
+        user: {
+          property: 'user',
+        },
+        endpoints: {
+          login: {
+            url: '/api/auth/login',
+            method: 'post',
+          },
+          logout: {
+            url: '/api/auth/logout',
+            method: 'post',
+          },
+          user: {
+            url: '/api/auth/user',
+            method: 'get',
+          },
+        },
+        // autoLogout: true,
+      },
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/login',
+      home: '/',
+    },
   },
 }

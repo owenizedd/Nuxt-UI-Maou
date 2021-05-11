@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  auth: false,
   name: 'loginPage',
   data(){
     return{
@@ -33,6 +34,9 @@ export default {
       await this.$nextTick();
       if(this.valid){
         //proceed register
+
+
+        this.$toast.success('Berhasil terdaftar. Silahkan login')
       }
     },
   },
