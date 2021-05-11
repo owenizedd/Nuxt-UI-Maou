@@ -48,6 +48,14 @@ export default {
       ].map(data => ({...data, sortable: false})),
     }
   },
+  methods: {
+    searchProduct(e){
+
+    },
+    handleMap(e){
+      
+    },
+  },
 };
 </script>
 
