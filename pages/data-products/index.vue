@@ -1,6 +1,6 @@
 <template lang="pug">
 v-layout(column)
-  v-btn.align-self-start 
+  v-btn(@click='goToManageProduct').align-self-start 
     v-icon mdi-plus
     | Tambah Produk
   v-text-field.mt-5(v-model='searchValue', @change='searchProduct', label='Cari Nama Produk/Kode Produk', prepend-inner-icon='mdi-magnify', filled, dense)
@@ -13,21 +13,42 @@ v-layout(column)
           span.blue--text Lihat lokasi
     template(v-slot:item.edit='{item}')
       td
-        v-btn
+        v-btn(@click='goToManageProduct(item)')
           v-icon mdi-pencil
-        v-btn.mx-3
+        v-btn( @click='goToDeleteForm(item)').mx-3
           v-icon(color='error') mdi-delete
+  manage-product-form(v-model='openManageForm', :product='selectedProduct')
+  v-dialog(v-model='openDeleteForm', width='400')
+    v-card.text-center.py-3.px-3
+      p Apakah anda ingin menghapus {{selectedProductToDelete.nama }} ? {{selectedProductToDelete.kode_produk}}
+      v-btn.mr-3(color='primary' @click='proceedToDelete') Ya
+      v-btn(color='secondary' @click='openDeleteForm = false') Tidak
+  v-dialog(v-model='openDeletedForm', width='400')
+    v-card.text-center.py-3.px-3
+      p Produk {{selectedProductToDelete.nama }} {{selectedProductToDelete.kode_produk}} Berhasil dihapus.
+      v-btn(color='secondary' @click='openDeletedForm = false') Oke
 </template>
 
 
 <script>
+import ManageProductForm from '/components/ManageProductForm';
+
 export default {
   name: 'AdminDataProducts',
+  components: {
+    ManageProductForm,
+  },
   data(){
+
     return{
+      openManageForm: false,
+      openDeleteForm: false,
+      selectedProduct: {},
+      selectedProductToDelete: {},
+      openDeletedForm: false,
       items: [
         {
-          product_code: 'BR00121',
+          kode_produk: 'BR00121',
           nama: 'Blue Band',
           brand: 'Unilever',
           harga: '15000',
@@ -37,7 +58,7 @@ export default {
       ],
       searchValue: '',
       headers: [
-        {text: 'Kode Produk', value: 'product_code'},
+        {text: 'Kode Produk', value: 'kode_produk'},
         { text: 'Nama Produk', value: 'nama'},
         {text: 'Brand', value: 'brand'},
         {text: 'Harga', value: 'harga'},
@@ -49,6 +70,19 @@ export default {
     }
   },
   methods: {
+    goToManageProduct(item = {}){
+      this.selectedProduct = item;
+      this.openManageForm = true;
+    },
+    goToDeleteForm(item){
+      this.selectedProductToDelete = item;
+      this.openDeleteForm = true;
+    },
+    proceedToDelete(){
+      this.items = this.items.filter(item => item.kode_produk !== this.selectedProductToDelete.kode_produk)
+      this.openDeleteForm = false;
+      this.openDeletedForm = true;
+    },
     searchProduct(e){
 
     },
