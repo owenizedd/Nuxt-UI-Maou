@@ -10,7 +10,7 @@
           v-card.py-5.px-5.text-center
             v-form(ref="form" v-model="valid" lazy-validation)
               h3.display-1 {{getTitle}}
-              v-text-field(v-model='formData.kode' :rules='requiredRule' label='Kode Produk')
+              v-text-field(v-model='formData.kode_produk' :rules='requiredRule' label='Kode Produk')
               v-text-field(v-model='formData.nama'  :rules='requiredRule' label='Nama Produk')
               v-text-field(v-model='formData.brand' :rules='requiredRule' label='Brand')
               v-text-field(v-model='formData.harga' :rules='requiredRule' label='Harga')
