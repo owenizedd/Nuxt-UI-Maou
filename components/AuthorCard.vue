@@ -2,7 +2,7 @@
 .author-card
   v-card.mx-auto(max-width='1000px')
     v-list-item()
-      v-list-item-avatar(tile size='80' color='grey')
+      v-list-item-avatar(tile size='200' color='grey')
         v-img(:src='avatarURL')
       v-list-item-content
         v-list-item-title.headline.mb-1
