@@ -85,9 +85,8 @@ export default {
       this.$refs.form.validate();
       await this.$nextTick();
       if(this.valid){
-        //proceed register
 
-        this.$toast.success('Berhasil terdaftar. Silahkan login')
+        this.$toast.success('Berhasil tersimpan.')
         this.$emit('input', false);
       }
     },
