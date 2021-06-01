@@ -71,6 +71,10 @@ export default {
           to: '/about',
           title: 'ABOUT US',
         },
+        {
+          to: '/route',
+          title: 'ROUTE',
+        },
       ],
       guestLinks: [
         {
