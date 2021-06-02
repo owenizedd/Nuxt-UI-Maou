@@ -29,9 +29,15 @@ export default {
       this.$refs.form.validate();
       await this.$nextTick();
       if(this.valid){
-        this.$auth.loginWith('local', { data: this.formData })
-          .then(() => this.$toast.success('Logged In!'))
-          .catch(() => this.$toast.error('Gagal login'))
+        this.$store.dispatch('login', this.formData);
+        await this.$nextTick();
+        if (this.$store.getters['getUsername']){
+          this.$router.push('/');
+        }
+        else this.$toast.error('gagal login');
+        // this.$auth.loginWith('local', { data: this.formData })
+        //   .then(() => this.$toast.success('Logged In!'))
+        //   .catch(() => this.$toast.error('Gagal login'))
       }
     },
   },

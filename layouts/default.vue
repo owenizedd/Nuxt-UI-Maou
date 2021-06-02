@@ -15,7 +15,7 @@
       template(v-if='isAdmin && username')
         nuxt-link.app-bar-link(v-for='link in adminLinks' :key='link.to' :to='link.to' :class='$route.path.indexOf(link.to) !== -1 ? "active" : ""')
           div {{link.title}}
-      p.ml-5(v-if='username') user_admin_1
+      p.ml-5(v-if='username') {{username}}
     v-main
       v-container
         nuxt

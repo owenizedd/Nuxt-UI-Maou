@@ -1,6 +1,6 @@
 const initialState = {
-  isAdmin: true,
-  username: 'a',
+  isAdmin: false,
+  username: '',
 }
 
 const getters = {
@@ -11,6 +11,25 @@ const getters = {
 const actions = {
   fetchData({ commit, dispatch }, data){
     
+  },
+  login({commit, dispatch}, {email, password}){
+    if (email === 'admin@maou.com' && password === 'admin'){
+      commit('setUsername', email);
+      commit('setAdminStatus', true);
+    }
+    if (email==='user@gmail.com' && password === 'user'){
+      commit('setUsername', email);
+      commit('setAdminStatus', false);
+    }
+  },
+  findBestRoute(context, data){
+    fetch(`https://api-fpa.herokuapp.com/findbestroute`, {
+      method: 'GET',
+      body: data,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
   },
 }
 

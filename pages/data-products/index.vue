@@ -38,6 +38,12 @@ export default {
   components: {
     ManageProductForm,
   },
+  mounted(){
+    if (!this.$store.getters['isAdmin']) {
+      this.$toast.error('Kamu tidak memiliki akses halaman ini');
+      this.$router.push('/')
+    }
+  },
   data(){
 
     return{
